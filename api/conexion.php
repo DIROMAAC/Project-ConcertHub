@@ -46,6 +46,33 @@ class Conexion
         $this->db = getenv('DB_NAME') ?: ($_ENV['DB_NAME'] ?? 'postgres');
         $this->usuario = getenv('DB_USER') ?: ($_ENV['DB_USER'] ?? 'postgres.kcpvrblggatiuctdcmqz');
         $this->pass = getenv('DB_PASS') ?: ($_ENV['DB_PASS'] ?? '96HOEWAsrx2acd7d');
+
+        # Restaurar sesión desde la cookie segura en Vercel
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        if (!isset($_SESSION['idUsuario']) && isset($_COOKIE['ch_user_session'])) {
+            try {
+                $key = 'ConcertHubSecretKey2026';
+                $cipher = 'aes-256-cbc';
+                $cookieValue = base64_decode($_COOKIE['ch_user_session']);
+                $ivlen = openssl_cipher_iv_length($cipher);
+                if (strlen($cookieValue) > $ivlen) {
+                    $iv = substr($cookieValue, 0, $ivlen);
+                    $ciphertext = substr($cookieValue, $ivlen);
+                    $sessionData = openssl_decrypt($ciphertext, $cipher, $key, 0, $iv);
+                    $data = json_decode($sessionData, true);
+                    if (is_array($data)) {
+                        $_SESSION['idUsuario'] = $data['idUsuario'];
+                        $_SESSION['correo'] = $data['correo'];
+                        $_SESSION['nombre'] = $data['nombre'];
+                        $_SESSION['Rol'] = $data['Rol'];
+                    }
+                }
+            } catch (Exception $e) {
+                // Ignorar fallos de decodificación
+            }
+        }
     }
 
     #Método para conectar

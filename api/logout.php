@@ -18,7 +18,10 @@ if (ini_get('session.use_cookies')) {
     );
 }
 
-// Destruir sesion y redirigir al login
+// Destruir sesion y limpiar cookie de sesion personalizada
+if (isset($_COOKIE['ch_user_session'])) {
+    setcookie('ch_user_session', '', time() - 3600, '/');
+}
 session_destroy();
 header('Location: logreg.php');
 exit();

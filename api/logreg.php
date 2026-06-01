@@ -123,6 +123,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $_SESSION['correo'] = $usuario['correo'];
                     $_SESSION['nombre'] = $usuario['nombre'];
                     $_SESSION['Rol'] = $usuario['Rol'];
+
+                    # Guardar sesión de forma persistente en cookies para soportar el entorno serverless de Vercel
+                    $sessionData = json_encode([
+                        'idUsuario' => $usuario['idUsuario'],
+                        'correo' => $usuario['correo'],
+                        'nombre' => $usuario['nombre'],
+                        'Rol' => $usuario['Rol']
+                    ]);
+                    $key = 'ConcertHubSecretKey2026';
+                    $cipher = 'aes-256-cbc';
+                    $ivlen = openssl_cipher_iv_length($cipher);
+                    $iv = openssl_random_pseudo_bytes($ivlen);
+                    $ciphertext = openssl_encrypt($sessionData, $cipher, $key, 0, $iv);
+                    $cookieValue = base64_encode($iv . $ciphertext);
+                    setcookie('ch_user_session', $cookieValue, time() + 86400 * 30, '/', '', true, true);
+
                     header("Location: prin.php");
                     exit();
                 } else {
