@@ -1,12 +1,6 @@
 <?php
 session_start();
 
-// Verificar si el usuario ha iniciado sesión
-if (!isset($_SESSION['idUsuario'])) {
-    header("Location: ../PROYECTO/php/logreg.php");
-    exit();
-}
-
 // Conexión a la base de datos
 require_once __DIR__ . "/conexion.php";
 $con = new Conexion();
@@ -73,7 +67,7 @@ if (isset($_GET['idArtista'])) {
 
         <div class="contenido">
             <!-- Botón de agregar artista encima del contenido -->
-            <?php if ($_SESSION['Rol'] == 1): ?>
+            <?php if (isset($_SESSION['Rol']) && $_SESSION['Rol'] == 1): ?>
                 <div class="add-artist-button">
                     <a href="addartist.php" class="btn-add-artist">Agregar Artista</a>
                 </div>
@@ -92,7 +86,7 @@ if (isset($_GET['idArtista'])) {
                         </a>
 
                         <!-- Botones solo para el administrador -->
-                        <?php if ($_SESSION['Rol'] == 1): ?>
+                        <?php if (isset($_SESSION['Rol']) && $_SESSION['Rol'] == 1): ?>
                             <div class="admin-buttons">
                                 <a href="modart.php?idArtista=<?= $artista['idArtista'] ?>" class="modify-button">Modificar</a>
                                 <a href="eliminar.php?idArtista=<?= $artista['idArtista'] ?>" class="delete-button" onclick="return confirm('¿Estás seguro de que deseas eliminar este artista?');">Eliminar</a>

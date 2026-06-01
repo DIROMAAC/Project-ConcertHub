@@ -2,18 +2,6 @@
 require_once __DIR__ . "/CAD.php";
 session_start(); // Iniciar sesión
 
-// Verificar si el usuario ha iniciado sesión
-if (!isset($_SESSION['idUsuario'])) {
-    header("Location: logreg.php"); // Redirigir al login si no está autenticado
-    exit();
-}
-
-// Validar si el rol está definido en la sesión
-if (!isset($_SESSION['Rol'])) {
-    echo "Error: No tienes permisos para acceder a esta página.";
-    exit();
-}
-
 $cad = new CAD();
 
 // Inicializar variables de filtros
@@ -94,13 +82,13 @@ if (!empty($filtros)) {
         </div>
 
         <!-- Botón para agregar concierto (solo admin) -->
-        <?php if ($_SESSION['Rol'] == 1): ?>
+        <?php if (isset($_SESSION['Rol']) && $_SESSION['Rol'] == 1): ?>
             <div class="add-concert">
                 <a href="agrega_concert.php" class="add-concert-button">Agregar Concierto</a>
             </div>
         <?php endif; ?>
 
-        <?php if ($_SESSION['Rol'] == 1): ?>
+        <?php if (isset($_SESSION['Rol']) && $_SESSION['Rol'] == 1): ?>
             <div class="add-code">
                 <a href="codigos.php" class="add-code-button">Codigos Descuentos</a>
             </div>
@@ -117,7 +105,7 @@ if (!empty($filtros)) {
                         <p><?php echo htmlspecialchars($concierto['lugar']); ?></p>
                         <p><strong>Precio:</strong> $<?php echo htmlspecialchars($concierto['precio']); ?></p>
                         <div class="actions">
-                            <?php if ($_SESSION['Rol'] == 1): ?>
+                            <?php if (isset($_SESSION['Rol']) && $_SESSION['Rol'] == 1): ?>
                                 <a href="modificaconcierto.php?idConcierto=<?php echo $concierto['idConcierto']; ?>" class="edit-button">Modificar</a>
                                 <a href="eliminaconcierto.php?idConcierto=<?php echo $concierto['idConcierto']; ?>" class="delete-button" onclick="return confirm('¿Estás seguro de que deseas eliminar este concierto?');">Eliminar</a>
                             <?php endif; ?>

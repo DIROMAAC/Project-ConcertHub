@@ -2,12 +2,6 @@
 require_once __DIR__ . "/CAD.php";
 session_start(); // Iniciar la sesión
 
-// Validar si el usuario ha iniciado sesión
-if (!isset($_SESSION['idUsuario'])) {
-    header("Location: logreg.php"); // Redirigir al login si no está autenticado
-    exit();
-}
-
 $cad = new CAD();
 $proximosConciertos = array_slice($cad->traeConciertos(), 0, 5); // Obtener los próximos conciertos
 ?>

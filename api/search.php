@@ -1,11 +1,5 @@
 <?php
 session_start();
-
-// Verificar si el usuario ha iniciado sesión
-if (!isset($_SESSION['idUsuario'])) {
-    header("Location: ../PROYECTO/php/logreg.php");
-    exit();
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
