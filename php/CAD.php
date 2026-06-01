@@ -10,10 +10,21 @@ class CAD
     {
         try {
             $con = new Conexion();
-            $query = $con->conectar()->prepare("INSERT INTO usuario (nombre, correo, contrasena) VALUES (:nombre, :correo, :contrasena)");
+            $db = $con->conectar();
+
+            $verifica = $db->prepare("SELECT idUsuario FROM usuario WHERE correo = :correo LIMIT 1");
+            $verifica->bindParam(':correo', $correo, PDO::PARAM_STR);
+            $verifica->execute();
+
+            if ($verifica->fetch(PDO::FETCH_ASSOC)) {
+                return "El correo ya está registrado.";
+            }
+
+            $contrasenaHash = password_hash($contrasena, PASSWORD_DEFAULT);
+            $query = $db->prepare("INSERT INTO usuario (nombre, correo, contrasena) VALUES (:nombre, :correo, :contrasena)");
             $query->bindParam(':nombre', $nombre, PDO::PARAM_STR);
             $query->bindParam(':correo', $correo, PDO::PARAM_STR);
-            $query->bindParam(':contrasena', $contrasena, PDO::PARAM_STR);
+            $query->bindParam(':contrasena', $contrasenaHash, PDO::PARAM_STR);
             
             if ($query->execute()) {
                 return "Usuario agregado correctamente.";
@@ -29,18 +40,44 @@ class CAD
     {
         try {
             $con = new Conexion();
-            $query = $con->conectar()->prepare("SELECT idUsuario, nombre, correo, Rol FROM usuario WHERE correo = :correo AND contrasena = :contrasena");
+            $db = $con->conectar();
+            $query = $db->prepare("SELECT idUsuario, nombre, correo, Rol, contrasena FROM usuario WHERE correo = :correo LIMIT 1");
             $query->bindParam(':correo', $correo, PDO::PARAM_STR);
-            $query->bindParam(':contrasena', $contrasena, PDO::PARAM_STR);
             $query->execute();
-    
-            if ($query->rowCount() > 0) {
-                // Usuario encontrado
-                return $query->fetch(PDO::FETCH_ASSOC);
-            } else {
-                // Usuario no encontrado
+
+            $usuario = $query->fetch(PDO::FETCH_ASSOC);
+            if (!$usuario) {
                 return false;
             }
+
+            $contrasenaGuardada = $usuario['contrasena'];
+            $esValida = password_verify($contrasena, $contrasenaGuardada);
+
+            // Compatibilidad con cuentas antiguas guardadas en texto plano.
+            if (!$esValida && hash_equals((string) $contrasenaGuardada, (string) $contrasena)) {
+                $esValida = true;
+
+                $nuevoHash = password_hash($contrasena, PASSWORD_DEFAULT);
+                $actualiza = $db->prepare("UPDATE usuario SET contrasena = :contrasena WHERE idUsuario = :idUsuario");
+                $actualiza->bindParam(':contrasena', $nuevoHash, PDO::PARAM_STR);
+                $actualiza->bindParam(':idUsuario', $usuario['idUsuario'], PDO::PARAM_INT);
+                $actualiza->execute();
+            }
+
+            if (!$esValida) {
+                return false;
+            }
+
+            if (password_needs_rehash($contrasenaGuardada, PASSWORD_DEFAULT)) {
+                $rehash = password_hash($contrasena, PASSWORD_DEFAULT);
+                $actualiza = $db->prepare("UPDATE usuario SET contrasena = :contrasena WHERE idUsuario = :idUsuario");
+                $actualiza->bindParam(':contrasena', $rehash, PDO::PARAM_STR);
+                $actualiza->bindParam(':idUsuario', $usuario['idUsuario'], PDO::PARAM_INT);
+                $actualiza->execute();
+            }
+
+            unset($usuario['contrasena']);
+            return $usuario;
         } catch (Exception $e) {
             return "Error: " . $e->getMessage();
         }
@@ -96,16 +133,16 @@ class CAD
 
     static public function eliminaUsuario($idUsuario)
     {
-        $con = new Conexion();//establecer conexion a bd
-        $query = $con->conectar()->prepare("DELETE FROM usuario WHERE idUsuario = $idUsuario");
-        if($query->execute())
-        {
-           return 1;
-        }
-        else
-        {
-            echo "Hubo un error";
-            print_r($con->conectar()->errorInfo()); 
+        try {
+            $con = new Conexion();
+            $query = $con->conectar()->prepare("DELETE FROM usuario WHERE idUsuario = :idUsuario");
+            $query->bindParam(':idUsuario', $idUsuario, PDO::PARAM_INT);
+            if ($query->execute()) {
+               return 1;
+            } else {
+                return 0;
+            }
+        } catch (Exception $e) {
             return 0;
         }
     }
@@ -153,14 +190,20 @@ class CAD
     
     public function modificaConcierto($datosModificar, $idConcierto)
     {
-        $con = new Conexion(); // Establecer conexión a la base de datos
-        $query = $con->conectar()->prepare("UPDATE conciertos SET $datosModificar WHERE idConcierto = :idConcierto");
-        $query->bindParam(':idConcierto', $idConcierto, PDO::PARAM_INT);
-        
-        if ($query->execute()) {
-            return true;
-        } else {
-            print_r($query->errorInfo());
+        try {
+            $con = new Conexion();
+            $queryStr = "UPDATE conciertos SET ";
+            $params = [];
+            foreach ($datosModificar as $campo => $valor) {
+                $queryStr .= "$campo = :$campo, ";
+                $params[":$campo"] = $valor;
+            }
+            $queryStr = rtrim($queryStr, ', ') . " WHERE idConcierto = :idConcierto";
+            $params[":idConcierto"] = $idConcierto;
+    
+            $query = $con->conectar()->prepare($queryStr);
+            return $query->execute($params);
+        } catch (Exception $e) {
             return false;
         }
     }

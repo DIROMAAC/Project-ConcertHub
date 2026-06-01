@@ -14,6 +14,7 @@ $proximosConciertos = array_slice($cad->traeConciertos(), 0, 5); // Obtener los 
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,6 +22,7 @@ $proximosConciertos = array_slice($cad->traeConciertos(), 0, 5); // Obtener los 
     <link rel="stylesheet" type="text/css" href="../css/estprin.css">
     <title>ConcertHub</title>
 </head>
+
 <body>
     <div class="contenedor">
         <!-- Menú -->
@@ -36,11 +38,12 @@ $proximosConciertos = array_slice($cad->traeConciertos(), 0, 5); // Obtener los 
                 <a href="../php/prin.php">HOME</a>
                 <a href="../php/artistas.php">ARTISTAS</a>
                 <a href="../php/conciertos.php">CONCIERTOS</a>
+                <a href="../php/actualiza.php">PERFIL</a>
             </div>
             <div class="icons">
                 <a href="../php/search.php"><img src="https://img.icons8.com/?size=100&id=7695&format=png&color=FFFFFF"></a>
                 <a href="../php/compras.php"><img src="https://img.icons8.com/?size=100&id=59997&format=png&color=FFFFFF"></a>
-                <a href="../php/logreg.php"><img src="https://img.icons8.com/?size=100&id=98957&format=png&color=FFFFFF"></a>
+                <a href="../php/logout.php"><img src="https://img.icons8.com/?size=100&id=98957&format=png&color=FFFFFF"></a>
             </div>
         </div>
 
@@ -84,14 +87,17 @@ $proximosConciertos = array_slice($cad->traeConciertos(), 0, 5); // Obtener los 
                 <source src="../vid/fondo.mp4" type="video/mp4">
                 Tu navegador no soporta el elemento de video.
             </video>
-            <a href="#"><img src="https://img.icons8.com/?size=100&id=32292&format=png&color=FFFFFF"></a>
-            <a href="#"><p>ConcertHub</p></a>
-            <a href="#"><img src="https://img.icons8.com/?size=100&id=435&format=png&color=FFFFFF"></a>
-            <a href="#"><p>ConcertHub</p></a>
-            <a href="#"><img src="https://img.icons8.com/?size=100&id=111056&format=png&color=FFFFFF"></a>
-            <a href="#"><p>ConcertHub</p></a>
-            <h2>ConcertHub &copy; 2022 Todos los derechos reservados.</h2>
+            <div class="pie-content">
+                <div class="pie-brand">ConcertHub</div>
+                <div class="pie-socials">
+                    <a href="#" target="_blank"><img src="https://img.icons8.com/?size=100&id=32292&format=png&color=FFFFFF" alt="Facebook"></a>
+                    <a href="#" target="_blank"><img src="https://img.icons8.com/?size=100&id=435&format=png&color=FFFFFF" alt="Twitter"></a>
+                    <a href="#" target="_blank"><img src="https://img.icons8.com/?size=100&id=111056&format=png&color=FFFFFF" alt="Instagram"></a>
+                </div>
+                <h2>ConcertHub &copy; 2022 Todos los derechos reservados.</h2>
+            </div>
         </div>
     </div>
 </body>
+
 </html>

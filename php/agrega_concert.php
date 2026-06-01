@@ -2,8 +2,8 @@
 require_once "cad.php";
 session_start();
 
-// Verificar si el usuario ha iniciado sesión
-if (!isset($_SESSION['idUsuario'])) {
+// Verificar si el usuario ha iniciado sesión y si tiene permisos de administrador
+if (!isset($_SESSION['idUsuario']) || $_SESSION['Rol'] != 1) {
     header("Location: logreg.php");
     exit();
 }
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $precio = $_POST['precio'];
         
         $cad = new CAD();
-        if ($cad->agregaConcierto($fecha, $hora, $artista, $lugar)) {
+        if ($cad->agregaConcierto($fecha, $hora, $artista, $lugar, $precio)) {
             // Redirigir después del registro exitoso
             header("Location: conciertos.php?");
             exit();
@@ -50,11 +50,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <a href="../php/prin.php">HOME</a>
                 <a href="../php/artistas.php">ARTISTAS</a>
                 <a href="../php/conciertos.php">CONCIERTOS</a>
+                <a href="../php/actualiza.php">PERFIL</a>
             </div>
             <div class="icons">
                 <a href="../php/search.php"><img src="https://img.icons8.com/?size=100&id=7695&format=png&color=FFFFFF"></a>
                 <a href="../php/compras.php"><img src="https://img.icons8.com/?size=100&id=59997&format=png&color=FFFFFF"></a>
-                <a href="../php/logreg.php"><img src="https://img.icons8.com/?size=100&id=98957&format=png&color=FFFFFF"></a>
+                <a href="../php/logout.php"><img src="https://img.icons8.com/?size=100&id=98957&format=png&color=FFFFFF"></a>
             </div>
         </div>
 

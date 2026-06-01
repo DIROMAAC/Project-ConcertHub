@@ -1,5 +1,12 @@
 <?php
 require_once "cad.php";
+session_start();
+
+// Verificar si el usuario ha iniciado sesión y si tiene permisos de administrador
+if (!isset($_SESSION['idUsuario']) || $_SESSION['Rol'] != 1) {
+    header("Location: logreg.php");
+    exit();
+}
 
 $cad = new CAD();
 $mensaje = "";

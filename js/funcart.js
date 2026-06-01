@@ -1,13 +1,27 @@
-const accessToken = 'API_KEY';
-
 const apiUrl = 'https://api.spotify.com/v1/search?q=genre:pop&type=artist&limit=48';
 
 let allArtists = []; // Almacena todos los artistas obtenidos
+
+// Función para obtener el token de acceso de manera segura desde el backend PHP
+async function getAccessToken() {
+    try {
+        const response = await fetch('../php/get_spotify_token.php');
+        if (!response.ok) throw new Error('Error al obtener el token del servidor');
+        const data = await response.json();
+        return data.access_token;
+    } catch (error) {
+        console.error('Error al obtener el token:', error);
+        return null;
+    }
+}
 
 // Función para obtener artistas desde la API
 async function fetchArtists() {
     try {
         console.log('Iniciando fetch a la API de Spotify...');
+        const accessToken = await getAccessToken();
+        if (!accessToken) throw new Error('No se pudo obtener el token de acceso');
+
         const response = await fetch(apiUrl, {
             method: 'GET',
             headers: {

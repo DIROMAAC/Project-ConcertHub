@@ -2,6 +2,12 @@
 require_once "cad.php";
 session_start();
 
+// Verificar si el usuario ha iniciado sesión y si tiene permisos de administrador
+if (!isset($_SESSION['idUsuario']) || $_SESSION['Rol'] != 1) {
+    header("Location: logreg.php");
+    exit();
+}
+
 $cad = new CAD();
 $errorMsg = "";
 
@@ -10,21 +16,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $datosModificar = [];
 
     if (!empty($_POST['fecha'])) {
-        $datosModificar[] = "fecha = '" . $_POST['fecha'] . "'";
+        $datosModificar['fecha'] = $_POST['fecha'];
     }
     if (!empty($_POST['hora'])) {
-        $datosModificar[] = "hora = '" . $_POST['hora'] . "'";
+        $datosModificar['hora'] = $_POST['hora'];
     }
     if (!empty($_POST['artista'])) {
-        $datosModificar[] = "artista = '" . $_POST['artista'] . "'";
+        $datosModificar['artista'] = $_POST['artista'];
     }
     if (!empty($_POST['lugar'])) {
-        $datosModificar[] = "lugar = '" . $_POST['lugar'] . "'";
+        $datosModificar['lugar'] = $_POST['lugar'];
     }
 
     if (!empty($datosModificar)) {
-        $queryModificar = implode(", ", $datosModificar);
-        if ($cad->modificaConcierto($queryModificar, $idConcierto)) {
+        if ($cad->modificaConcierto($datosModificar, $idConcierto)) {
             header("Location: conciertos.php?msg=Concierto modificado con éxito");
             exit();
         } else {

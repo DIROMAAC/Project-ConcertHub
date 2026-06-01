@@ -1,5 +1,12 @@
 <?php
 require_once "cad.php";
+session_start();
+
+// Verificar si el usuario ha iniciado sesión y si tiene permisos de administrador
+if (!isset($_SESSION['idUsuario']) || $_SESSION['Rol'] != 1) {
+    header("Location: logreg.php");
+    exit();
+}
 
 $cad = new CAD();
 $mensaje = "";
@@ -22,13 +29,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre'], $_POST['bio
 
         // Subir la foto
         if (move_uploaded_file($foto['tmp_name'], $fotoPath)) {
-            // Guardar el artista en la base de datos
-            $conexion = (new Conexion())->conectar();
-            $query = $conexion->prepare("INSERT INTO artistas (nombre, biografia, imagen) VALUES (?, ?, ?)");
-            $query->execute([$nombre, $biografia, 'imgart/' . basename($foto['name'])]);
+            // Guardar el artista en la base de datos usando CAD
+            $resultado = CAD::agregaArtista($nombre, $biografia, 'imgart/' . basename($foto['name']));
 
-            // Mensaje de éxito
-            $mensaje = "Artista agregado correctamente.";
+            if ($resultado === true) {
+                // Mensaje de éxito
+                $mensaje = "Artista agregado correctamente.";
+            } else {
+                $mensaje = "Error al agregar el artista: " . $resultado;
+            }
         } else {
             $mensaje = "Error al subir la foto del artista.";
         }

@@ -1,122 +1,482 @@
-body{margin: 0px; padding: 0px;}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', 'Outfit', 'Segoe UI', sans-serif;
+    background-color: #f5f5f7;
+    color: #1d1d1f;
+    overflow-x: hidden;
+}
 
 /* Estilos para pantalla monitor mayores a 1025*/
-@media screen and (min-width: 1025px)
-{
-    .contenedor{width: 1170px; margin: 0px auto;}
+@media screen and (min-width: 1025px) {
+    .contenedor {
+        width: 1170px;
+        margin: 0 auto;
+        padding-top: 100px;
+    }
 
-    .menu{height: 70px; display: flex; align-items: center; position: fixed; top: 0; width: 1170px; background-color: rgba(255, 255, 255, 0.4); overflow: hidden; z-index: 10;}
-    #background-video{position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: -1; transform: translate(-50%, -50%);}
-    .menu .name{width: 300px; font-size: 50px; font-family: Perpetua, serif; padding-left: 20px; color: white;}
-    .menu .sections{width: 500px; margin-left: 50px; padding-left: 10px;}
-    .menu .sections a{text-decoration: none; font-size: 30px; font-family: Perpetua, serif; padding-left: 10px; color: white; border-right: 1px solid black; padding-right: 10px;}
-    .menu .sections a:last-child{border-right: none;}
-    .menu .icons{width: 120px; height: 35px; display: flex; gap: 10px; margin-left: 160px;}
-    .icons img{width: 30px; height: 30px; color: white;}
+    .menu {
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        height: 70px;
+        display: flex;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        width: 1170px;
+        background-color: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        overflow: hidden;
+        z-index: 10;
+        border-radius: 0 0 10px 10px;
+    }
 
-    .contenido{height: 2347px;}
-    .contenido .banner{height: 600px; width: 1170px; background-image: url(C:\\Users\\DiegoMaldonado\\Downloads\\UASLPDR\\7MOSEMESTRE\\WEB\\PROYECTO\\img\\part.jpg); background-position: center; background-repeat: no-repeat;}
-    .contenido .banner img{width: 100%; height: 100%; object-fit: cover;}
-    .newalbum {display: flex; justify-content: center; align-items: center; width: 100%; height: 500px; background-color: black;} 
-    .spotify-player {width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;} 
-    .spotify-player iframe {width: 100%; height: 100%; border: none;}
-    
-    .contenido .calendar { font-family: Perpetua, serif; margin-top: 20px; }
-    .contenido .calendar h1 { font-size: 26px; color: #3A5DAE; margin-bottom: 20px; }
-    .contenido .calendar .concert { height: 150px; font-size: 18px; font-family: Perpetua, serif; border-bottom: 1px solid skyblue; display: flex; align-items: center; justify-content: space-between; padding: 20px; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
-    .contenido .calendar .concert p { flex: 1; margin: 5px 10px; color: #000000; }
-    .contenido .calendar .concert p.concert-date, 
-    .contenido .calendar .concert p.concert-time { font-weight: bold; color: #000000; }
-    .contenido .calendar .concert p.concert-artist { font-size: 20px; font-weight: bold; color: #000; }
-    .contenido .calendar .concert p.concert-place { color: #000000; font-style: italic; }
-    .contenido .calendar .concert .buy-button { background-color: #4CAF50; color: white; padding: 15px 32px; font-size: 16px; border: none; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); transition: background-color 0.3s ease, box-shadow 0.3s ease; text-decoration: none;}
-    .contenido .calendar .concert .buy-button:hover { background-color: #45a049; box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3); transform: scale(1.05); }
-    .contenido .calendar .concert:last-of-type { border-bottom: none; }
-    .contenido .calendar .show-more { text-align: center; margin-top: 30px; }
-    .contenido .calendar .show-more-button { background-color: #3A5DAE; color: white; padding: 15px 40px; font-size: 20px; font-weight: bold; border: none; border-radius: 12px; cursor: pointer; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); transition: background-color 0.3s ease, box-shadow 0.3s ease; }
-    .contenido .calendar .show-more-button:hover { background-color: #2E4C89; box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3); transform: scale(1.05); }
-    
-    .artists { display: flex; gap: 20px; justify-content: start; padding: 20px; overflow: hidden; white-space: nowrap;}
-    .artist { text-align: center; color: white; text-decoration: none; font-size: 14px; flex: 0 0 auto; }
-    .artist img { width: 200px; height: 200px; border-radius: 10px; object-fit: cover; transition: transform 0.3s ease-in-out; }
-    .artist img:hover { transform: scale(1.05); }
-    .artist p { margin-top: 10px; font-size: 16px; }
-    
-    .pie{height: 300px; position: relative;} 
-    .pie a{text-decoration: none;}
-    .pie img{width: 20px; height: 20px; z-index: 1; margin-top: 20px; margin-left: 20px;} 
-    .pie p{font-family: Perpetua, serif; font-size: 20px; color: white; z-index: 1; margin-left: 50px; margin-top: -20px;}
-    .pie h2{font-family: Perpetua, serif; font-size: 20px; color: white; z-index: 1; margin-left: 20px; margin-top: 30px;}
-    #pie-video {position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; object-fit: cover; transform: translate(-50%, -50%); z-index: -1;}
+    #background-video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 70px;
+        max-width: 1170px;
+        object-fit: cover;
+        z-index: -2;
+        transform: translate(-50%, -50%);
+        opacity: 0.1;
+    }
 
+    .menu .name {
+        width: 300px;
+        font-size: 32px;
+        font-weight: 700;
+        font-family: 'Outfit', sans-serif;
+        padding-left: 20px;
+        color: #1f2833;
+        background: linear-gradient(45deg, #2b6cb0, #3182ce);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .menu .sections {
+        width: 500px;
+        margin-left: 50px;
+        display: flex;
+        gap: 20px;
+    }
+
+    .menu .sections a {
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 500;
+        color: #6e6e73;
+        transition: color 0.3s ease, border-color 0.3s ease;
+        border-bottom: 2px solid transparent;
+        padding-bottom: 5px;
+    }
+
+    .menu .sections a:hover {
+        color: #2b6cb0;
+        border-color: #2b6cb0;
+    }
+
+    .menu .icons {
+        width: 120px;
+        height: 35px;
+        display: flex;
+        gap: 15px;
+        margin-left: auto;
+        margin-right: 20px;
+        align-items: center;
+    }
+
+    .icons img {
+        width: 24px;
+        height: 24px;
+        opacity: 0.8;
+        filter: brightness(0);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .icons img:hover {
+        opacity: 1;
+        transform: scale(1.15);
+    }
+
+    .contenido {
+        min-height: calc(100vh - 400px);
+    }
+
+    .contenido .banner {
+        height: 600px;
+        width: 1170px;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    .contenido .banner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .newalbum {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 500px;
+        background-color: #f5f5f7;
+        margin-top: 40px;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.03);
+    }
+
+    .spotify-player {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .spotify-player iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+
+    .contenido .calendar {
+        margin-top: 50px;
+        padding: 0 20px;
+    }
+
+    .contenido .calendar h1 {
+        font-size: 26px;
+        font-weight: 700;
+        color: #1d1d1f;
+        letter-spacing: 1px;
+        margin-bottom: 30px;
+        background: linear-gradient(45deg, #1d1d1f, #2b6cb0);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .contenido .calendar .concert {
+        height: 120px;
+        font-size: 16px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 30px;
+        background-color: rgba(255, 255, 255, 0.75);
+        border-radius: 12px;
+        margin-bottom: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+        box-sizing: border-box;
+    }
+
+    .contenido .calendar .concert p {
+        flex: 1;
+        margin: 0;
+        color: #6e6e73;
+    }
+
+    .contenido .calendar .concert p strong {
+        color: #1d1d1f;
+        margin-right: 5px;
+    }
+
+    .contenido .calendar .concert p.concert-date,
+    .contenido .calendar .concert p.concert-time {
+        font-weight: 600;
+        color: #6e6e73;
+    }
+
+    .contenido .calendar .concert p.concert-artist {
+        font-size: 20px;
+        font-weight: 700;
+        color: #1d1d1f;
+    }
+
+    .contenido .calendar .concert p.concert-place {
+        color: #6e6e73;
+    }
+
+    .contenido .calendar .concert .buy-button {
+        background-color: #2b6cb0;
+        color: #ffffff;
+        padding: 12px 25px;
+        font-size: 14px;
+        font-weight: 700;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 12px rgba(43, 108, 176, 0.2);
+        text-decoration: none;
+    }
+
+    .contenido .calendar .concert .buy-button:hover {
+        background-color: #1a569d;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(43, 108, 176, 0.35);
+    }
+
+    .contenido .calendar .show-more {
+        text-align: center;
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+
+    .contenido .calendar .show-more-button {
+        background: rgba(43, 108, 176, 0.08);
+        border: 1px solid rgba(43, 108, 176, 0.3);
+        color: #2b6cb0;
+        padding: 12px 35px;
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+    }
+
+    .contenido .calendar .show-more-button:hover {
+        background: rgba(43, 108, 176, 0.15);
+        border-color: #2b6cb0;
+        transform: scale(1.03);
+    }
+
+    .artists-container {
+        margin-top: 50px;
+        padding: 0 20px;
+    }
+
+    .artists {
+        display: flex;
+        gap: 20px;
+        justify-content: start;
+        padding: 20px 0;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .artist {
+        text-align: center;
+        color: #6e6e73;
+        text-decoration: none;
+        font-size: 14px;
+        flex: 0 0 auto;
+    }
+
+    .artist img {
+        width: 200px;
+        height: 200px;
+        border-radius: 12px;
+        object-fit: cover;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .artist img:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(43, 108, 176, 0.12);
+    }
+
+    .artist p {
+        margin-top: 12px;
+        font-size: 16px;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+
+    .artist:hover p {
+        color: #2b6cb0;
+    }
+
+    .pie {
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        height: 180px;
+        margin-top: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        border-radius: 16px 16px 0 0;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        overflow: hidden;
+    }
+
+    #pie-video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: translate(-50%, -50%);
+        z-index: -2;
+        opacity: 0.05;
+    }
+
+    .pie-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        z-index: 2;
+    }
+
+    .pie-brand {
+        font-size: 20px;
+        font-weight: 700;
+        font-family: 'Outfit', sans-serif;
+        color: #1d1d1f;
+        letter-spacing: 0.5px;
+    }
+
+    .pie-socials {
+        display: flex;
+        gap: 25px;
+        align-items: center;
+    }
+
+    .pie-socials a {
+        transition: transform 0.3s ease;
+    }
+
+    .pie-socials a:hover {
+        transform: scale(1.2);
+    }
+
+    .pie-socials img {
+        width: 22px;
+        height: 22px;
+        opacity: 0.7;
+        filter: invert(0.85);
+        transition: opacity 0.3s ease;
+    }
+
+    .pie-socials img:hover {
+        opacity: 1;
+    }
+
+    .pie h2 {
+        font-size: 13px;
+        color: #8f9092;
+        margin: 5px 0 0 0;
+        font-weight: 400;
+    }
 }
 
 /* Estilos para pantalla tablet 680 y 1024 */
 @media screen and (min-width: 680px) and (max-width: 1024px) {
-    .contenedor { width: 100%; margin: 0 auto; }
-    .menu { height: 70px; display: flex; align-items: center; position: fixed; top: 0; width: 100%; background-color: rgba(255, 255, 255, 0.4); overflow: hidden; z-index: 10; }
-    #background-video { position: absolute; top: 0; left: 0; width: 100%; height: auto; z-index: -1; object-fit: cover; }
-    .menu .name { width: 200px; font-size: 30px; font-family: Perpetua, serif; padding-left: 20px; color: white; }
-    .menu .sections { width: auto; margin-left: 10px; padding-left: 10px; }
-    .menu .sections a { text-decoration: none; font-size: 20px; font-family: Perpetua, serif; padding-left: 10px; color: white; border-right: 1px solid black; padding-right: 10px; }
-    .menu .sections a:last-child { border-right: none; }
-    .menu .icons { width: auto; height: 35px; display: flex; gap: 10px; margin-left: 10px; }
-    .icons img { width: 25px; height: 25px; color: white; }
-    .contenido .banner { height: 400px; width: 100%; }
-    .contenido .banner img { width: 100%; height: 100%; object-fit: cover; }
-    .contenido .newalbum { height: 300px; display: flex; justify-content: center; align-items: center; }
-    .spotify-player { width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; }
-    .spotify-player iframe { width: 100%; height: 100%; border: none; }
-    .contenido .calendar .concert { font-size: 16px; padding: 15px; margin: 10px 0; display: flex; flex-direction: column; align-items: center; text-align: center; }
-    .contenido .calendar .concert .buy-button { background-color: #4CAF50; color: white; padding: 12px 25px; font-size: 14px; border: none; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); transition: background-color 0.3s ease, box-shadow 0.3s ease; text-decoration: none; }
-    .contenido .calendar .concert .buy-button:hover { background-color: #45a049; box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3); }
-    .contenido .calendar .show-more { margin-top: 20px; text-align: center; }
-    .contenido .calendar .show-more-button { padding: 10px 20px; font-size: 14px; background-color: #3A5DAE; color: white; border: none; border-radius: 8px; cursor: pointer; transition: background-color 0.3s ease; }
-    .contenido .calendar .show-more-button:hover { background-color: #2E4C89; }
-    .artists { display: flex; gap: 15px; overflow-x: auto; padding: 20px; }
-    .artist { text-align: center; color: white; text-decoration: none; font-size: 14px; flex: 0 0 auto; width: 150px; }
-    .artist img { width: 100%; height: auto; border-radius: 10px; object-fit: cover; transition: transform 0.3s ease-in-out; }
-    .artist img:hover { transform: scale(1.05); }
-    .artist p { margin-top: 10px; font-size: 16px; }
-    .pie { height: 240px; position: relative; background-color: rgba(0, 0, 0, 0.5); padding: 20px; }
-    .pie a { text-decoration: none; }
-    .pie img { width: 20px; height: 20px; margin: 10px; }
-    .pie p { font-family: Perpetua, serif; font-size: 18px; color: white; margin: 0 10px; }
-    .pie h2 { font-family: Perpetua, serif; font-size: 18px; color: white; margin: 10px 0; }
-    #pie-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
+    .contenedor {
+        width: 100%;
+        padding: 90px 20px 20px 20px;
+        box-sizing: border-box;
+    }
+
+    .menu {
+        width: calc(100% - 40px);
+        left: 20px;
+    }
+
+    .contenido .banner {
+        height: 400px;
+        width: 100%;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .contenido .newalbum {
+        height: 300px;
+    }
+
+    .contenido .calendar .concert {
+        padding: 20px;
+        margin: 15px 0;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.75);
+        border-radius: 12px;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .contenido .calendar .concert p {
+        margin: 4px 0;
+    }
+
+    .contenido .calendar .concert .buy-button {
+        width: 100%;
+        text-align: center;
+    }
 }
 
 /* Estilos para pantalla móvil 1 y 679 */
 @media screen and (min-width: 1px) and (max-width: 679px) {
-    .contenedor { width: 100%; margin: 0 auto; }
-    .menu { height: 50px; display: flex; align-items: center; position: fixed; top: 0; width: 100%; background-color: rgba(255, 255, 255, 0.4); overflow: hidden; z-index: 10; }
-    #background-video { position: absolute; top: 0; left: 0; width: 100%; height: auto; z-index: -1; object-fit: cover; }
-    .menu .name { width: auto; font-size: 20px; font-family: Perpetua, serif; padding-left: 10px; color: white; }
-    .menu .sections { width: auto; margin-left: 5px; padding-left: 5px; }
-    .menu .sections a { text-decoration: none; font-size: 16px; font-family: Perpetua, serif; padding-left: 5px; color: white; border-right: 1px solid black; padding-right: 5px; }
-    .menu .sections a:last-child { border-right: none; }
-    .menu .icons { width: auto; height: 30px; display: flex; gap: 5px; margin-left: 5px; }
-    .icons img { width: 20px; height: 20px; color: white; }
-    .contenido .banner { height: 300px; width: 100%; }
-    .contenido .banner img { width: 100%; height: 100%; object-fit: cover; }
-    .contenido .newalbum { height: 250px; display: flex; justify-content: center; align-items: center; }
-    .spotify-player { width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; }
-    .spotify-player iframe { width: 100%; height: 100%; border: none; }
-    .contenido .calendar .concert { font-size: 14px; padding: 10px; margin: 5px 0; display: flex; flex-direction: column; align-items: center; text-align: center; }
-    .contenido .calendar .concert .buy-button { background-color: #4CAF50; color: white; padding: 10px 20px; font-size: 12px; border: none; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); transition: background-color 0.3s ease, box-shadow 0.3s ease; }
-    .contenido .calendar .concert .buy-button:hover { background-color: #45a049; box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3); }
-    .contenido .calendar .show-more { margin-top: 15px; text-align: center; }
-    .contenido .calendar .show-more-button { padding: 8px 15px; font-size: 12px; background-color: #3A5DAE; color: white; border: none; border-radius: 6px; cursor: pointer; transition: background-color 0.3s ease; }
-    .contenido .calendar .show-more-button:hover { background-color: #2E4C89; }
-    .artists { display: flex; gap: 10px; overflow-x: auto; padding: 10px; }
-    .artist { text-align: center; color: white; text-decoration: none; font-size: 14px; flex: 0 0 auto; width: 100px; }
-    .artist img { width: 100%; height: auto; border-radius: 10px; object-fit: cover; transition: transform 0.3s ease-in-out; }
-    .artist img:hover { transform: scale(1.05); }
-    .artist p { margin-top: 5px; font-size: 14px; }
-    .pie { height: 200px; position: relative; background-color: rgba(0, 0, 0, 0.5); padding: 10px; }
-    .pie a { text-decoration: none; }
-    .pie img { width: 15px; height: 15px; margin: 5px; }
-    .pie p { font-family: Perpetua, serif; font-size: 12px; color: white; margin: 5px; }
-    .pie h2 { font-family: Perpetua, serif; font-size: 12px; color: white; margin: 5px 0; }
-    #pie-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
+    .contenedor {
+        width: 100%;
+        padding: 80px 15px 15px 15px;
+        box-sizing: border-box;
+    }
+
+    .menu {
+        width: calc(100% - 30px);
+        left: 15px;
+        height: 60px;
+    }
+
+    .menu .name {
+        font-size: 24px;
+        width: auto;
+    }
+
+    .menu .sections {
+        display: none;
+    }
+
+    .menu .icons {
+        margin-left: auto;
+        margin-right: 10px;
+    }
+
+    .contenido .banner {
+        height: 250px;
+        width: 100%;
+        border-radius: 6px;
+    }
+
+    .contenido .newalbum {
+        height: 250px;
+    }
+
+    .contenido .calendar .concert {
+        padding: 15px;
+        margin: 10px 0;
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.75);
+        border-radius: 8px;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .contenido .calendar .concert p {
+        margin: 3px 0;
+    }
+
+    .contenido .calendar .concert .buy-button {
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+    }
 }

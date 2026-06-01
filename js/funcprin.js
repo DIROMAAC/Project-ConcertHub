@@ -1,22 +1,43 @@
-const accessToken = 'API_KEY';
-
 // Mostrar canciones de una playlist
 const playlistId = '7kfPf285KnlWUTbqaB1jnI'; // ID del álbum
 const apiUrl = `https://api.spotify.com/v1/albums/${playlistId}/tracks`;
 
 let trackList = []; // Para almacenar todas las canciones
 
-fetch(apiUrl, {
-    method: 'GET',
-    headers: {
-        Authorization: `Bearer ${accessToken}`
+// Función para obtener el token de acceso de manera segura desde el backend PHP
+async function getAccessToken() {
+    try {
+        const response = await fetch('../php/get_spotify_token.php');
+        if (!response.ok) throw new Error('Error al obtener el token del servidor');
+        const data = await response.json();
+        return data.access_token;
+    } catch (error) {
+        console.error('Error al obtener el token:', error);
+        return null;
     }
-})
-    .then(response => response.json())
-    .then(data => {
+}
+
+async function fetchTracks() {
+    try {
+        const accessToken = await getAccessToken();
+        if (!accessToken) throw new Error('No se pudo obtener el token de acceso');
+
+        const response = await fetch(apiUrl, {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        });
+        if (!response.ok) throw new Error('Error en la API de Spotify');
+        const data = await response.json();
         trackList = data.items; // Guardamos las canciones de la playlist
-    })
-    .catch(error => console.error('Error al cargar la playlist:', error));
+        console.log('Canciones cargadas correctamente.');
+    } catch (error) {
+        console.error('Error al cargar la playlist:', error);
+    }
+}
+
+fetchTracks();
 
     document.addEventListener('DOMContentLoaded', () => {
         displayManualArtists(); // Carga los artistas manuales

@@ -1,189 +1,493 @@
-body { margin: 0px; padding: 0px; }
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', 'Outfit', 'Segoe UI', sans-serif;
+    background-color: #f5f5f7;
+    color: #1d1d1f;
+    overflow-x: hidden;
+}
 
 /* Estilos para pantalla monitor mayores a 1025 */
 @media screen and (min-width: 1025px) {
-    .contenedor { width: 1170px; margin: 0 auto; }
-    .menu { height: 70px; display: flex; align-items: center; position: fixed; top: 0; width: 1170px; background-color: rgba(255, 255, 255, 0.4); overflow: hidden; z-index: 10; }
-    #background-video { position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: -1; transform: translate(-50%, -50%); }
-    .menu .name { width: 300px; font-size: 50px; font-family: Perpetua, serif; padding-left: 20px; color: white; }
-    .menu .sections { width: 500px; margin-left: 50px; padding-left: 10px; }
-    .menu .sections a { text-decoration: none; font-size: 30px; font-family: Perpetua, serif; padding-left: 10px; color: white; border-right: 1px solid black; padding-right: 10px; }
-    .menu .sections a:last-child { border-right: none; }
-    .menu .icons { width: 120px; height: 35px; display: flex; gap: 10px; margin-left: 160px; }
-    .icons img { width: 30px; height: 30px; color: white; }
-    .contenido { padding-top: 100px; text-align: center; min-height: 100vh; }
-    .artist-grid { display: flex; flex-direction: column; gap: 20px; justify-items: center; margin-top: 20px; }
+    .contenedor {
+        width: 1170px;
+        margin: 0 auto;
+        padding-top: 100px;
+    }
+
+    .menu {
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        height: 70px;
+        display: flex;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        width: 1170px;
+        background-color: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        overflow: hidden;
+        z-index: 10;
+        border-radius: 0 0 10px 10px;
+    }
+
+    #background-video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 70px;
+        max-width: 1170px;
+        object-fit: cover;
+        z-index: -2;
+        transform: translate(-50%, -50%);
+        opacity: 0.1;
+    }
+
+    .menu .name {
+        width: 300px;
+        font-size: 32px;
+        font-weight: 700;
+        font-family: 'Outfit', sans-serif;
+        padding-left: 20px;
+        color: #1f2833;
+        background: linear-gradient(45deg, #2b6cb0, #3182ce);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .menu .sections {
+        width: 500px;
+        margin-left: 50px;
+        display: flex;
+        gap: 20px;
+    }
+
+    .menu .sections a {
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 500;
+        color: #6e6e73;
+        transition: color 0.3s ease, border-color 0.3s ease;
+        border-bottom: 2px solid transparent;
+        padding-bottom: 5px;
+    }
+
+    .menu .sections a:hover {
+        color: #2b6cb0;
+        border-color: #2b6cb0;
+    }
+
+    .menu .icons {
+        width: 120px;
+        height: 35px;
+        display: flex;
+        gap: 15px;
+        margin-left: auto;
+        margin-right: 20px;
+        align-items: center;
+    }
+
+    .icons img {
+        width: 24px;
+        height: 24px;
+        opacity: 0.8;
+        filter: brightness(0);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .icons img:hover {
+        opacity: 1;
+        transform: scale(1.15);
+    }
+
+    .contenido {
+        min-height: 100vh;
+        padding: 20px;
+    }
+
+    .artist-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        margin-top: 20px;
+    }
+
     #artist-container {
         display: flex;
         flex-direction: column;
-        gap: 20px; /* Espacio entre cada artista */
+        gap: 30px;
     }
+
     .artist {
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 16px;
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+        transition: all 0.3s ease;
     }
+
+    .artist:hover {
+        border-color: rgba(43, 108, 176, 0.2);
+    }
+
     #songs-container {
-        margin-top: 20px;
-        padding: 10px;
-        background-color: #f4f4f4;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-top: 30px;
+        padding: 25px;
+        background: rgba(0, 0, 0, 0.02);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.03);
+        text-align: left;
     }
+
+    #songs-container h2 {
+        font-size: 20px;
+        font-weight: 700;
+        color: #1d1d1f;
+        margin: 0 0 20px 0;
+    }
+
     #songs-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .song {
+        padding: 15px 20px;
+        background: rgba(255, 255, 255, 0.85);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        border-radius: 8px;
         display: flex;
         flex-direction: column;
         gap: 10px;
     }
-    .song {
-        padding: 10px;
-        background-color: #fff;
-        border-radius: 5px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
+
     .song p {
         font-size: 16px;
-        margin-bottom: 10px;
+        font-weight: 600;
+        color: #1d1d1f;
+        margin: 0;
     }
-    
+
     audio {
         width: 100%;
-        margin-top: 10px;
+        outline: none;
     }
-    .artist-link { text-decoration: none; }
-    .artist-info { display: flex; align-items: center; gap: 20px; justify-content: center; width: 700px; }
-    .artist-img { width: 150px; height: auto; border-radius: 10px; transition: transform 0.3s; }
-    .artist-img:hover { transform: scale(1.05); }
-    .artist-bio { max-width: 400px; text-align: left; }
-    .artist-name { font-size: 20px; font-family: Perpetua, serif; color: black; margin: 0; }
-    .artist-description { font-size: 16px; font-family: Arial, sans-serif; color: #555; margin-top: 10px; width: 850px; }
-    .add-artist-button {
-        position: absolute; /* Fijar el botón en la pantalla */
-        top: 100px; /* Distancia desde la parte superior */
-        left: 1180px; /* Distancia desde la derecha */
-         /* Para asegurarse de que esté por encima del contenido */
-    }
-    
-    .btn-add-artist {
-        background-color: #192bf2e0; /* Color de fondo */
-        color: white;
-        padding: 10px 20px;
-        font-size: 16px;
-        text-decoration: none;
-        border-radius: 5px;
-    }
-    
-    .btn-add-artist:hover {
-        background-color: #1225f3; /* Cambio de color al pasar el mouse */
-    }
-    
-    .add-songs { margin-top: 20px; text-align: center; }
-    .add-songs-button { display: inline-block; padding: 10px 20px; background-color: #55c1a4cc; color: white; text-decoration: none; font-size: 18px; border-radius: 5px; transition: background-color 0.3s; }
-    .add-songs-button:hover { background-color: #4caf95; }
-    .pie { height: 300px; position: relative; margin-top: 50px; clear: both; }
-    .pie a { text-decoration: none; }
-    .pie img { width: 20px; height: 20px; z-index: 1; margin-top: 20px; margin-left: 20px; }
-    .pie p { font-family: Perpetua, serif; font-size: 20px; color: white; z-index: 1; margin-left: 50px; margin-top: -20px; }
-    .pie h2 { font-family: Perpetua, serif; font-size: 20px; color: white; z-index: 1; margin-left: 20px; margin-top: 30px; }
-    #pie-video { position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; object-fit: cover; transform: translate(-50%, -50%); z-index: -1; }
-    .modify-button { display: inline-block; padding: 8px 16px; background-color: #FFA500; color: white; text-decoration: none; font-size: 14px; border-radius: 5px; transition: background-color 0.3s; }
-    .modify-button:hover { background-color: #FF8C00; }
-    .delete-button { display: inline-block; padding: 8px 16px; background-color: #F44336; color: white; text-decoration: none; font-size: 14px; border-radius: 5px; transition: background-color 0.3s; }
-    .delete-button:hover { background-color: #D32F2F; }
 
+    .artist-link {
+        text-decoration: none;
+    }
+
+    .artist-info {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .artist-img {
+        width: 180px;
+        height: 180px;
+        border-radius: 12px;
+        object-fit: cover;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .artist-img:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(43, 108, 176, 0.12);
+    }
+
+    .artist-bio {
+        flex: 1;
+        text-align: left;
+    }
+
+    .artist-name {
+        font-size: 24px;
+        font-weight: 700;
+        color: #1d1d1f;
+        margin: 0 0 12px 0;
+    }
+
+    .artist-description {
+        font-size: 15px;
+        color: #6e6e73;
+        margin: 0;
+        line-height: 1.5;
+    }
+
+    .add-artist-button {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 100;
+    }
+
+    .btn-add-artist {
+        background-color: #2b6cb0;
+        color: #ffffff;
+        padding: 12px 25px;
+        font-size: 14px;
+        font-weight: 700;
+        text-decoration: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(43, 108, 176, 0.2);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn-add-artist:hover {
+        background-color: #1a569d;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(43, 108, 176, 0.35);
+    }
+
+    .admin-buttons {
+        display: flex;
+        gap: 12px;
+        justify-content: flex-end;
+        margin-top: 20px;
+    }
+
+    .add-songs-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background: rgba(43, 108, 176, 0.08);
+        border: 1px solid rgba(43, 108, 176, 0.3);
+        color: #2b6cb0;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .add-songs-button:hover {
+        background: rgba(43, 108, 176, 0.15);
+        border-color: #2b6cb0;
+    }
+
+    .modify-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background: rgba(0, 0, 0, 0.02);
+        border: 1px solid rgba(0, 0, 0, 0.10);
+        color: #6e6e73;
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .modify-button:hover {
+        background: rgba(0, 0, 0, 0.05);
+        border-color: rgba(0, 0, 0, 0.2);
+        color: #1d1d1f;
+    }
+
+    .delete-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background: rgba(244, 67, 54, 0.05);
+        border: 1px solid rgba(244, 67, 54, 0.2);
+        color: #f44336;
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .delete-button:hover {
+        background: rgba(244, 67, 54, 0.12);
+        border-color: #f44336;
+    }
+
+    .pie {
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        height: 180px;
+        margin-top: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        border-radius: 16px 16px 0 0;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        overflow: hidden;
+    }
+
+    .pie-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        z-index: 2;
+    }
+
+    .pie-brand {
+        font-size: 20px;
+        font-weight: 700;
+        font-family: 'Outfit', sans-serif;
+        color: #1d1d1f;
+        letter-spacing: 0.5px;
+    }
+
+    .pie-socials {
+        display: flex;
+        gap: 25px;
+        align-items: center;
+    }
+
+    .pie-socials a {
+        transition: transform 0.3s ease;
+    }
+
+    .pie-socials a:hover {
+        transform: scale(1.2);
+    }
+
+    .pie-socials img {
+        width: 22px;
+        height: 22px;
+        opacity: 0.7;
+        filter: invert(0.85);
+        transition: opacity 0.3s ease;
+    }
+
+    .pie-socials img:hover {
+        opacity: 1;
+    }
+
+    .pie p {
+        font-size: 14px;
+        color: #6e6e73;
+        margin: 5px 0;
+    }
+
+    .pie h2 {
+        font-size: 13px;
+        color: #8f9092;
+        margin: 5px 0 0 0;
+        font-weight: 400;
+    }
+
+    #pie-video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: translate(-50%, -50%);
+        z-index: -2;
+        opacity: 0.05;
+    }
 }
 
 /* Estilos para pantalla tablet 680px a 1024px */
 @media screen and (min-width: 680px) and (max-width: 1024px) {
-    .contenedor { width: 100%; margin: 0 auto; }
-    .menu { height: 70px; display: flex; align-items: center; position: fixed; top: 0; width: 100%; background-color: rgba(255, 255, 255, 0.4); z-index: 10; }
-    #background-video { position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; object-fit: cover; z-index: -1; transform: translate(-50%, -50%); }
-    .menu .name { width: auto; font-size: 30px; font-family: Perpetua, serif; padding-left: 10px; color: white; }
-    .menu .sections { width: auto; display: flex; gap: 10px; padding-left: 10px; }
-    .menu .sections a { text-decoration: none; font-size: 18px; font-family: Perpetua, serif; padding: 5px; color: white; border-right: 1px solid black; }
-    .menu .sections a:last-child { border-right: none; }
-    .menu .icons { display: flex; gap: 10px; margin-left: auto; padding-right: 10px; }
-    .icons img { width: 25px; height: 25px; transition: transform 0.3s ease; }
-    .icons img:hover { transform: scale(1.2); }
+    .contenedor {
+        width: 100%;
+        padding: 90px 20px 20px 20px;
+        box-sizing: border-box;
+    }
 
-    .contenido { padding-top: 100px; text-align: center; min-height: 100vh; padding: 20px; }
-    .artist-grid { display: flex; flex-direction: column; gap: 15px; justify-items: center; }
-    .artist { text-align: center; width: 180px; text-decoration: none; }
-    .artist-info { display: flex; align-items: center; gap: 20px; justify-content: center; }
-    .artist-img { width: 150px; height: auto; border-radius: 10px; transition: transform 0.3s; }
-    .artist-img:hover { transform: scale(1.05); }
-    .artist-bio { max-width: 400px; text-align: left; }
-    .artist-name { font-size: 18px; font-family: Perpetua, serif; color: black; margin: 0; }
-    .artist-description { font-size: 16px; font-family: Arial, sans-serif; color: #555; margin-top: 10px; }
+    .menu {
+        width: calc(100% - 40px);
+        left: 20px;
+    }
 
-    /* Botones de admin visibles */
+    .contenido {
+        padding-top: 30px;
+    }
+
+    .artist {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .artist-info {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .artist-bio {
+        text-align: center;
+    }
+
     .admin-buttons {
-        display: flex;
-        gap: 10px;
-        margin-top: 10px;
         justify-content: center;
     }
-    .modify-button, .delete-button {
-        font-size: 14px;
-        padding: 8px 16px;
-        border-radius: 5px;
-        text-decoration: none;
-    }
-    .modify-button { background-color: #FFA500; color: white; }
-    .modify-button:hover { background-color: #FF8C00; }
-    .delete-button { background-color: #F44336; color: white; }
-    .delete-button:hover { background-color: #D32F2F; }
-
-    .pie { height: 250px; background-color: rgba(0, 0, 0, 0.5); padding: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; }
-    .pie img { width: 15px; height: 15px; margin: 5px; }
-    .pie p { font-size: 14px; color: white; margin: 5px; }
-    .pie h2 { font-size: 14px; color: white; margin: 5px; }
-    #pie-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
 }
 
 /* Estilos para pantalla móvil 1px a 679px */
 @media screen and (min-width: 1px) and (max-width: 679px) {
-    .contenedor { width: 100%; margin: 0 auto; }
-    .menu { height: 50px; display: flex; align-items: center; position: fixed; top: 0; width: 100%; background-color: rgba(255, 255, 255, 0.4); overflow: hidden; z-index: 10; }
-    #background-video { position: absolute; top: 0; left: 0; width: 100%; height: auto; z-index: -1; object-fit: cover; }
-    .menu .name { width: auto; font-size: 20px; font-family: Perpetua, serif; padding-left: 10px; color: white; }
-    .menu .sections { width: auto; margin-left: 5px; padding-left: 5px; }
-    .menu .sections a { text-decoration: none; font-size: 16px; font-family: Perpetua, serif; padding-left: 5px; color: white; border-right: 1px solid black; padding-right: 5px; }
-    .menu .sections a:last-child { border-right: none; }
-    .menu .icons { width: auto; height: 30px; display: flex; gap: 5px; margin-left: 5px; }
-    .icons img { width: 20px; height: 20px; color: white; }
+    .contenedor {
+        width: 100%;
+        padding: 80px 15px 15px 15px;
+        box-sizing: border-box;
+    }
 
-    .contenido { padding-top: 150px; text-align: center; padding: 15px; }
-    .artist-grid { display: flex; flex-direction: column; gap: 10px; justify-items: center; }
-    .artist { text-align: center; width: 140px; text-decoration: none; }
-    .artist-info { display: flex; flex-direction: column; align-items: center; gap: 10px; justify-content: center; text-align: center; }
-    .artist-img { width: 100%; height: auto; border-radius: 10px; transition: transform 0.3s; }
-    .artist-img:hover { transform: scale(1.05); }
-    .artist-bio { max-width: 100%; font-size: 12px; text-align: left; }
+    .menu {
+        width: calc(100% - 30px);
+        left: 15px;
+        height: 60px;
+    }
 
-    /* Botones de admin visibles */
-    .admin-buttons {
-        display: flex;
+    .menu .name {
+        font-size: 24px;
+        width: auto;
+    }
+
+    .menu .sections {
+        display: none;
+    }
+
+    .menu .icons {
+        margin-left: auto;
+        margin-right: 10px;
+    }
+
+    .contenido {
+        padding-top: 20px;
+    }
+
+    .artist {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    .artist-info {
         flex-direction: column;
-        gap: 10px;
-        margin-top: 10px;
-        justify-content: center;
+        align-items: center;
+        text-align: center;
     }
-    .modify-button, .delete-button {
-        font-size: 12px;
-        padding: 6px 12px;
-        border-radius: 5px;
-        text-decoration: none;
-    }
-    .modify-button { background-color: #FFA500; color: white; }
-    .modify-button:hover { background-color: #FF8C00; }
-    .delete-button { background-color: #F44336; color: white; }
-    .delete-button:hover { background-color: #D32F2F; }
 
-    .pie { height: 200px; background-color: rgba(0, 0, 0, 0.5); padding: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; }
-    .pie img { width: 10px; height: 10px; margin: 5px; }
-    .pie p { font-size: 12px; color: white; margin: 5px; }
-    .pie h2 { font-size: 12px; color: white; margin: 5px; }
-    #pie-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
+    .artist-bio {
+        text-align: center;
+    }
+
+    .admin-buttons {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .add-songs-button, .modify-button, .delete-button {
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+    }
 }

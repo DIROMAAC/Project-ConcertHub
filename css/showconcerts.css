@@ -1,138 +1,553 @@
-body{margin: 0px; padding: 0px;}
-
-/* Estilos para pantalla monitor mayores a 1025*/
-@media screen and (min-width: 1025px)
-{
-    .contenedor {width: 1170px; margin: 0 auto;} 
-    .menu {border: 1px solid burlywood; height: 70px; display: flex; align-items: center; position: fixed; top: 0; width: 1170px; background-color: rgba(255, 255, 255, 0.4); overflow: hidden; z-index: 10;} 
-    #background-video { position: absolute; top: 50%; left: 50%; width: 100%; height: 70px; max-width: 1170px; object-fit: cover; z-index: -1; transform: translate(-50%, -50%); }
-    .menu .name {width: 300px; font-size: 50px; font-family: Perpetua, serif; padding-left: 20px; color: white;} 
-    .menu .sections {width: 500px; margin-left: 50px; padding-left: 10px;} 
-    .menu .sections a {text-decoration: none; font-size: 30px; font-family: Perpetua, serif; padding-left: 10px; color: white; border-right: 1px solid black; padding-right: 10px;} 
-    .menu .sections a:last-child {border-right: none;} 
-    .menu .icons {width: 120px; height: 35px; display: flex; gap: 10px; margin-left: 160px;} 
-    .icons img {width: 30px; height: 30px; color: white;} 
-    
-    .filter-container { margin-top: 50px; padding: 20px; background-color: #f4f4f4; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
-    .filter-container h2 { margin-bottom: 15px; font-size: 20px; font-family: Arial, sans-serif; color: #333; }
-    .filter-group { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
-    .filter-actions { display: flex; gap: 15px; }
-    .filters input { padding: 10px; font-size: 16px; border: 1px solid #ddd; border-radius: 5px; flex: 1; }
-    .filter-button { padding: 10px 20px; font-size: 16px; background-color: #3A5DAE; color: white; border: none; border-radius: 5px; cursor: pointer; }
-    .filter-button:hover { background-color: #2E4C89; }
-    .clear-filters { font-size: 14px; text-decoration: none; color: #3A5DAE; }
-    .clear-filters:hover { text-decoration: underline; }
-    
-    .add-concert { margin: 20px 0; text-align: right; }
-    .add-concert-button { background-color: #4CAF50; color: white; padding: 10px 20px; font-size: 16px; text-decoration: none; border: none; border-radius: 8px; cursor: pointer; }
-    .add-concert-button:hover { background-color: #45a049; }
-
-    .add-code {margin: 20px 0; text-align: right;} 
-    .add-code-button {background-color: #514caf; color: white; padding: 10px 20px; font-size: 16px; text-decoration: none; border: none; border-radius: 8px; cursor: pointer; transition: background-color 0.3s ease, transform 0.3s ease; display: inline-block; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);} 
-    .add-code-button:hover {background-color: #403a9f; transform: translateY(-2px); box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);}    
-    
-    .concert { min-height: 180px; font-size: 16px; font-family: Perpetua, serif; border-bottom: 1px solid rgba(0, 0, 0, 0.5); margin-right: 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap; padding: 15px; gap: 20px; }
-    .concert p { flex: 1; margin: 5px 0; font-weight: bold; color: #000000;}
-    .concert .actions { display: flex; gap: 10px; align-items: center; }
-    .concert .buy-button { background-color: #4CAF50; color: white; padding: 10px 20px; font-size: 14px; border: none; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); transition: background-color 0.3s ease, box-shadow 0.3s ease; }
-    .concert .edit-button { background-color: #2196F3; color: white; padding: 10px 20px; font-size: 14px; border: none; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); transition: background-color 0.3s ease, box-shadow 0.3s ease; }
-    .concert .delete-button { background-color: #F44336; color: white; padding: 10px 20px; font-size: 14px; border: none; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); transition: background-color 0.3s ease, box-shadow 0.3s ease; }
-    .concert .buy-button:hover { box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3); transform: scale(1.05); background-color: #45a049; }
-    .concert .edit-button:hover { box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3); transform: scale(1.05); background-color: #1976D2; }
-    .concert .delete-button:hover { box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3); transform: scale(1.05); background-color: #D32F2F; }
-    
-    .pie { height: 300px; position: relative; }
-    .pie a { text-decoration: none; }
-    .pie img { width: 20px; height: 20px; z-index: 1; margin-top: 20px; margin-left: 20px; }
-    .pie p { font-family: Perpetua, serif; font-size: 20px; color: white; z-index: 1; margin-left: 50px; margin-top: -20px; }
-    .pie h2 { font-family: Perpetua, serif; font-size: 20px; color: white; z-index: 1; margin-left: 20px; margin-top: 30px; }
-    #pie-video { position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; object-fit: cover; transform: translate(-50%, -50%); z-index: -1; }
-    
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', 'Outfit', 'Segoe UI', sans-serif;
+    background-color: #f5f5f7;
+    color: #1d1d1f;
+    overflow-x: hidden;
 }
 
-/* Estilos para pantalla tablet 680 y 1024 */
+/* Contenedor principal */
+.contenedor {
+    width: 1170px;
+    margin: 0 auto;
+    padding-top: 100px; /* Espacio para el menú fijo */
+}
+
+/* Menú Superior Glass */
+.menu {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    height: 70px;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 1170px;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    overflow: hidden;
+    z-index: 10;
+    border-radius: 0 0 10px 10px;
+}
+
+#background-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 70px;
+    max-width: 1170px;
+    object-fit: cover;
+    z-index: -2;
+    transform: translate(-50%, -50%);
+    opacity: 0.1;
+}
+
+.menu .name {
+    width: 300px;
+    font-size: 32px;
+    font-weight: 700;
+    font-family: 'Outfit', sans-serif;
+    padding-left: 20px;
+    color: #1f2833;
+    background: linear-gradient(45deg, #2b6cb0, #3182ce);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.menu .sections {
+    width: 500px;
+    margin-left: 50px;
+    display: flex;
+    gap: 20px;
+}
+
+.menu .sections a {
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    color: #6e6e73;
+    transition: color 0.3s ease, border-color 0.3s ease;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 5px;
+}
+
+.menu .sections a:hover {
+    color: #2b6cb0;
+    border-color: #2b6cb0;
+}
+
+.menu .icons {
+    width: 120px;
+    height: 35px;
+    display: flex;
+    gap: 15px;
+    margin-left: auto;
+    margin-right: 20px;
+    align-items: center;
+}
+
+.icons img {
+    width: 24px;
+    height: 24px;
+    opacity: 0.8;
+    filter: brightness(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.icons img:hover {
+    opacity: 1;
+    transform: scale(1.15);
+}
+
+/* Sección de Filtros Glassmorphic */
+.filter-container {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    padding: 25px 30px;
+    margin: 20px 20px 30px 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.filter-container h2 {
+    margin: 0 0 20px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1d1d1f;
+    letter-spacing: 0.5px;
+}
+
+.filter-group {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.filter-group input {
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: #1d1d1f;
+    outline: none;
+    transition: all 0.3s ease;
+    flex: 1;
+    box-sizing: border-box;
+}
+
+.filter-group input::placeholder {
+    color: #8f9092;
+}
+
+.filter-group input:focus {
+    border-color: #2b6cb0;
+    background: #ffffff;
+    box-shadow: 0 0 10px rgba(43, 108, 176, 0.1);
+}
+
+.filter-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+}
+
+.filter-button {
+    background-color: #2b6cb0;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 25px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(43, 108, 176, 0.2);
+}
+
+.filter-button:hover {
+    background-color: #1a569d;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(43, 108, 176, 0.35);
+}
+
+.clear-filters {
+    color: #6e6e73;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.clear-filters:hover {
+    color: #2b6cb0;
+}
+
+/* Botones de Administración */
+.add-concert, .add-code {
+    margin: 20px;
+    display: inline-block;
+}
+
+.add-concert-button, .add-code-button {
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.add-concert-button {
+    background: rgba(43, 108, 176, 0.08);
+    border: 1px solid rgba(43, 108, 176, 0.3);
+    color: #2b6cb0;
+}
+
+.add-concert-button:hover {
+    background: rgba(43, 108, 176, 0.15);
+    border-color: #2b6cb0;
+    transform: translateY(-2px);
+}
+
+.add-code-button {
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    color: #6e6e73;
+    margin-left: 10px;
+}
+
+.add-code-button:hover {
+    background: rgba(0, 0, 0, 0.06);
+    border-color: rgba(0, 0, 0, 0.2);
+    color: #1d1d1f;
+    transform: translateY(-2px);
+}
+
+/* Fila de Concierto Horizontal Clásica */
+.contenido {
+    min-height: calc(100vh - 400px);
+    padding: 20px;
+}
+
+.concert {
+    min-height: 100px;
+    font-size: 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    margin: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    gap: 20px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    transition: background 0.3s ease;
+}
+
+.concert:hover {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.concert p {
+    flex: 1;
+    margin: 0;
+    font-weight: 500;
+    color: #6e6e73;
+}
+
+.concert p strong {
+    color: #1d1d1f;
+    font-weight: 600;
+    margin-right: 5px;
+}
+
+.concert p:nth-child(3) {
+    font-weight: 700;
+    color: #1d1d1f;
+    font-size: 17px;
+}
+
+.concert p:nth-child(5) {
+    color: #2b6cb0;
+    font-weight: 700;
+}
+
+.concert .actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.buy-button {
+    background-color: #2b6cb0;
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: 700;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 10px rgba(43, 108, 176, 0.15);
+}
+
+.buy-button:hover {
+    background-color: #1a569d;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(43, 108, 176, 0.3);
+}
+
+.edit-button {
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.10);
+    color: #6e6e73;
+    padding: 10px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.edit-button:hover {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.25);
+    color: #1d1d1f;
+}
+
+.delete-button {
+    background: rgba(244, 67, 54, 0.05);
+    border: 1px solid rgba(244, 67, 54, 0.2);
+    color: #f44336;
+    padding: 10px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.delete-button:hover {
+    background: rgba(244, 67, 54, 0.12);
+    border-color: #f44336;
+}
+
+/* Pie de Página */
+.pie {
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    height: 180px;
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border-radius: 16px 16px 0 0;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    overflow: hidden;
+}
+
+.pie-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    z-index: 2;
+}
+
+.pie-brand {
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Outfit', sans-serif;
+    color: #1d1d1f;
+    letter-spacing: 0.5px;
+}
+
+.pie-socials {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.pie-socials a {
+    transition: transform 0.3s ease;
+}
+
+.pie-socials a:hover {
+    transform: scale(1.2);
+}
+
+.pie-socials img {
+    width: 22px;
+    height: 22px;
+    opacity: 0.7;
+    filter: invert(0.85);
+    transition: opacity 0.3s ease;
+}
+
+.pie-socials img:hover {
+    opacity: 1;
+}
+
+.pie p {
+    font-size: 14px;
+    color: #6e6e73;
+    margin: 5px 0;
+}
+
+.pie h2 {
+    font-size: 13px;
+    color: #8f9092;
+    margin: 5px 0 0 0;
+    font-weight: 400;
+}
+
+#pie-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    z-index: -2;
+    opacity: 0.05;
+}
+
+/* ==========================================================================
+   Responsive: Pantalla Tablet (680px a 1024px)
+   ========================================================================== */
 @media screen and (min-width: 680px) and (max-width: 1024px) {
-    .contenedor {width: 100%; margin: 0 auto;} 
-    .menu {height: 70px; display: flex; align-items: center; position: fixed; top: 0; width: 100%; background-color: rgba(255, 255, 255, 0.4); z-index: 10;} 
-    #background-video {position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; object-fit: cover; z-index: -1; transform: translate(-50%, -50%);} 
-    .menu .name {width: auto; font-size: 30px; font-family: Perpetua, serif; padding-left: 10px; color: white;} 
-    .menu .sections {width: auto; display: flex; gap: 10px; padding-left: 10px;} 
-    .menu .sections a {text-decoration: none; font-size: 18px; font-family: Perpetua, serif; padding: 5px; color: white; border-right: 1px solid black;} 
-    .menu .sections a:last-child {border-right: none;} 
-    .menu .icons {display: flex; gap: 10px; margin-left: auto; padding-right: 10px;} 
-    .icons img {width: 25px; height: 25px; transition: transform 0.3s ease;} 
-    .icons img:hover {transform: scale(1.2);}  
+    .contenedor {
+        width: 100%;
+        padding: 90px 20px 20px 20px;
+        box-sizing: border-box;
+    }
+    
+    .menu {
+        width: calc(100% - 40px);
+        left: 20px;
+    }
 
-    .filter-container {margin-top: 70px; padding: 20px; background-color: #f4f4f4; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);} 
-    .filter-container h2 {font-size: 20px; margin-bottom: 10px; color: #333;} 
-    .filter-group {display: flex; gap: 10px; flex-wrap: wrap;} 
-    .filters input {padding: 10px; font-size: 14px; border: 1px solid #ddd; border-radius: 5px; width: calc(50% - 10px);} 
-    .filter-actions {display: flex; justify-content: center; gap: 10px; margin-top: 10px;} 
-    .filter-button, .clear-filters {padding: 8px 12px; font-size: 14px; border-radius: 5px; background-color: #3A5DAE; color: white; border: none; cursor: pointer; transition: background-color 0.3s, transform 0.3s;}
-    .filter-button:hover, .clear-filters:hover {background-color: #2E4C89; transform: scale(1.05);} 
+    .filter-container {
+        margin-left: 0;
+        margin-right: 0;
+        padding: 20px;
+    }
 
-    .add-concert {margin-top: 20px; text-align: center;} 
-    .add-concert-button {padding: 10px 15px; font-size: 14px; border-radius: 5px; background-color: #4CAF50; color: white; border: none; cursor: pointer; transition: background-color 0.3s, transform 0.3s;} 
-    .add-concert-button:hover {background-color: #45a049; transform: scale(1.05);} 
+    .filter-group {
+        flex-direction: column;
+        gap: 12px;
+    }
 
-    .contenido {margin-top: 30px; padding: 10px;} 
-    .concert {padding: 10px; font-size: 14px; display: flex; gap: 15px; flex-wrap: wrap; justify-content: space-between; background: #f9f9f9; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);} 
-    .concert p {font-size: 14px; color: #333; margin-bottom: 5px;} 
-    .actions {display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;} 
-    .buy-button, .edit-button, .delete-button {padding: 8px 10px; font-size: 14px; border-radius: 5px; color: white; border: none; cursor: pointer; transition: background-color 0.3s, transform 0.3s;} 
-    .buy-button {background-color: #4CAF50;}
-    .buy-button:hover {background-color: #45a049; transform: scale(1.05);}
-    .edit-button {background-color: #2196F3;}
-    .edit-button:hover {background-color: #1976D2; transform: scale(1.05);}
-    .delete-button {background-color: #F44336;}
-    .delete-button:hover {background-color: #D32F2F; transform: scale(1.05);} 
+    .concert {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+        margin: 10px 0;
+    }
 
-    .pie {height: 240px; background-color: rgba(0, 0, 0, 0.5); display: flex; justify-content: center; align-items: center; padding: 20px; position: relative;} 
-    .pie img {width: 15px; height: 15px; margin: 10px;} 
-    .pie p {font-size: 14px; color: white; margin: 0 10px;} 
-    .pie h2 {font-size: 14px; color: white; margin: 10px 0;} 
-    #pie-video {position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;}
+    .concert p {
+        width: 100%;
+    }
+
+    .concert .actions {
+        justify-content: flex-end;
+        width: 100%;
+    }
 }
 
-/* Estilos para pantalla móvil 1 y 679 */
+/* ==========================================================================
+   Responsive: Pantalla Móvil (1px a 679px)
+   ========================================================================== */
 @media screen and (min-width: 1px) and (max-width: 679px) {
-    .contenedor {width: 100%; margin: 0 auto;} 
-    .menu { height: 50px; display: flex; align-items: center; position: fixed; top: 0; width: 100%; background-color: rgba(255, 255, 255, 0.4); overflow: hidden; z-index: 10; }
-    #background-video { position: absolute; top: 0; left: 0; width: 100%; height: auto; z-index: -1; object-fit: cover; }
-    .menu .name { width: auto; font-size: 20px; font-family: Perpetua, serif; padding-left: 10px; color: white; }
-    .menu .sections { width: auto; margin-left: 5px; padding-left: 5px; }
-    .menu .sections a { text-decoration: none; font-size: 16px; font-family: Perpetua, serif; padding-left: 5px; color: white; border-right: 1px solid black; padding-right: 5px; }
-    .menu .sections a:last-child { border-right: none; }
-    .menu .icons { width: auto; height: 30px; display: flex; gap: 5px; margin-left: 5px; }
-    .icons img { width: 20px; height: 20px; color: white; } 
+    .contenedor {
+        width: 100%;
+        padding: 80px 15px 15px 15px;
+        box-sizing: border-box;
+    }
+    
+    .menu {
+        width: calc(100% - 30px);
+        left: 15px;
+        height: 60px;
+    }
 
-    .filter-container {margin-top: 60px; padding: 10px; background-color: #f4f4f4; border-radius: 5px;} 
-    .filter-container h2 {font-size: 16px; margin-bottom: 5px; color: #333;} 
-    .filter-group {display: flex; flex-direction: column; gap: 5px;} 
-    .filters input {padding: 8px; font-size: 12px; border: 1px solid #ddd; border-radius: 5px;} 
-    .filter-actions {display: flex; justify-content: center; gap: 5px; margin-top: 5px;} 
-    .filter-button, .clear-filters {font-size: 12px; padding: 6px 10px; border-radius: 5px; background-color: #3A5DAE; color: white; border: none; cursor: pointer; transition: background-color 0.3s, transform 0.3s;}
-    .filter-button:hover, .clear-filters:hover {background-color: #2E4C89; transform: scale(1.05);} 
+    .menu .name {
+        font-size: 24px;
+        width: auto;
+    }
 
-    .add-concert {margin-top: 10px; text-align: center;} 
-    .add-concert-button {padding: 8px 10px; font-size: 12px; border-radius: 5px; background-color: #4CAF50; color: white; border: none; cursor: pointer; transition: background-color 0.3s, transform 0.3s;} 
-    .add-concert-button:hover {background-color: #45a049; transform: scale(1.05);} 
+    .menu .sections {
+        display: none; /* Ocultar menú de texto para ahorrar espacio */
+    }
 
-    .contenido {margin-top: 10px; padding: 10px;} 
-    .concert {padding: 10px; font-size: 12px; display: flex; flex-direction: column; gap: 10px; background: #f9f9f9; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);} 
-    .concert p {font-size: 12px; margin-bottom: 5px; color: #333;} 
-    .actions {display: flex; gap: 5px; justify-content: center; flex-wrap: wrap;} 
-    .buy-button, .edit-button, .delete-button {font-size: 12px; padding: 6px 8px; border-radius: 5px; color: white; border: none; cursor: pointer; transition: background-color 0.3s, transform 0.3s;} 
-    .buy-button {background-color: #4CAF50;}
-    .buy-button:hover {background-color: #45a049; transform: scale(1.05);}
-    .edit-button {background-color: #2196F3;}
-    .edit-button:hover {background-color: #1976D2; transform: scale(1.05);}
-    .delete-button {background-color: #F44336;}
-    .delete-button:hover {background-color: #D32F2F; transform: scale(1.05);} 
+    .menu .icons {
+        margin-left: auto;
+        margin-right: 10px;
+    }
 
-    .pie {height: 250px; background-color: rgba(0, 0, 0, 0.5); padding: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; margin-top: 30px;} 
-    .pie img {width: 15px; height: 15px; margin: 5px;} 
-    .pie p {font-size: 12px; color: white; margin: 5px;} 
-    .pie h2 {font-size: 12px; color: white; margin: 5px;} 
-    #pie-video {position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;}  
+    .filter-container {
+        margin-left: 0;
+        margin-right: 0;
+        padding: 15px;
+    }
+
+    .filter-group {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .filter-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .filter-button {
+        width: 100%;
+        text-align: center;
+    }
+
+    .clear-filters {
+        text-align: center;
+        padding: 8px 0;
+    }
+
+    .concert {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+        margin: 10px 0;
+        padding: 15px;
+    }
+
+    .concert p {
+        width: 100%;
+    }
+
+    .concert .actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .buy-button, .edit-button, .delete-button {
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+    }
 }

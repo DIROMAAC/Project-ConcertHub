@@ -23,7 +23,7 @@ $nombreArtista = ""; // Variable para almacenar el nombre del artista
 
 if (isset($_GET['idArtista'])) {
     $idArtista = $_GET['idArtista'];
-    
+
     // Obtener las canciones del artista seleccionado
     $query = $pdo->prepare("SELECT * FROM canciones WHERE idArtista = ?");
     $query->execute([$idArtista]);
@@ -40,12 +40,14 @@ if (isset($_GET['idArtista'])) {
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../css/estart.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/estart.css" />
     <title>ConcertHub - Artistas</title>
 </head>
+
 <body>
     <div class="contenedor">
         <div class="menu">
@@ -60,11 +62,12 @@ if (isset($_GET['idArtista'])) {
                 <a href="../php/prin.php">HOME</a>
                 <a href="../php/artistas.php">ARTISTAS</a>
                 <a href="../php/conciertos.php">CONCIERTOS</a>
+                <a href="../php/actualiza.php">PERFIL</a>
             </div>
             <div class="icons">
                 <a href="../php/search.php"><img src="https://img.icons8.com/?size=100&id=7695&format=png&color=FFFFFF"></a>
                 <a href="../php/compras.php"><img src="https://img.icons8.com/?size=100&id=59997&format=png&color=FFFFFF"></a>
-                <a href="../php/logreg.php"><img src="https://img.icons8.com/?size=100&id=98957&format=png&color=FFFFFF"></a>
+                <a href="../php/logout.php"><img src="https://img.icons8.com/?size=100&id=98957&format=png&color=FFFFFF"></a>
             </div>
         </div>
 
@@ -129,14 +132,17 @@ if (isset($_GET['idArtista'])) {
                 <source src="../vid/fondo.mp4" type="video/mp4">
                 Tu navegador no soporta el elemento de video.
             </video>
-            <a href="#"><img src="https://img.icons8.com/?size=100&id=32292&format=png&color=FFFFFF"></a>
-            <a href="#"><p>ConcertHub</p></a>
-            <a href="#"><img src="https://img.icons8.com/?size=100&id=435&format=png&color=FFFFFF"></a>
-            <a href="#"><p>ConcertHub</p></a>
-            <a href="#"><img src="https://img.icons8.com/?size=100&id=111056&format=png&color=FFFFFF"></a>
-            <a href="#"><p>ConcertHub</p></a>
-            <h2>ConcertHub &copy; 2022 Todos los derechos reservados.</h2>
+            <div class="pie-content">
+                <div class="pie-brand">ConcertHub</div>
+                <div class="pie-socials">
+                    <a href="#" target="_blank"><img src="https://img.icons8.com/?size=100&id=32292&format=png&color=FFFFFF" alt="Facebook"></a>
+                    <a href="#" target="_blank"><img src="https://img.icons8.com/?size=100&id=435&format=png&color=FFFFFF" alt="Twitter"></a>
+                    <a href="#" target="_blank"><img src="https://img.icons8.com/?size=100&id=111056&format=png&color=FFFFFF" alt="Instagram"></a>
+                </div>
+                <h2>ConcertHub &copy; 2022 Todos los derechos reservados.</h2>
+            </div>
         </div>
     </div>
 </body>
+
 </html>

@@ -45,12 +45,14 @@ if (!empty($filtros)) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../css/showconcerts.css">
     <title>ConcertHub - Conciertos</title>
 </head>
+
 <body>
     <div class="contenedor">
         <!-- Menú -->
@@ -66,11 +68,12 @@ if (!empty($filtros)) {
                 <a href="../php/prin.php">HOME</a>
                 <a href="../php/artistas.php">ARTISTAS</a>
                 <a href="../php/conciertos.php">CONCIERTOS</a>
+                <a href="../php/actualiza.php">PERFIL</a>
             </div>
             <div class="icons">
                 <a href="../php/search.php"><img src="https://img.icons8.com/?size=100&id=7695&format=png&color=FFFFFF"></a>
                 <a href="../php/compras.php"><img src="https://img.icons8.com/?size=100&id=59997&format=png&color=FFFFFF"></a>
-                <a href="../php/logreg.php"><img src="https://img.icons8.com/?size=100&id=98957&format=png&color=FFFFFF"></a>
+                <a href="../php/logout.php"><img src="https://img.icons8.com/?size=100&id=98957&format=png&color=FFFFFF"></a>
             </div>
         </div>
 
@@ -96,7 +99,7 @@ if (!empty($filtros)) {
                 <a href="agrega_concert.php" class="add-concert-button">Agregar Concierto</a>
             </div>
         <?php endif; ?>
-        
+
         <?php if ($_SESSION['Rol'] == 1): ?>
             <div class="add-code">
                 <a href="codigos.php" class="add-code-button">Codigos Descuentos</a>
@@ -116,9 +119,7 @@ if (!empty($filtros)) {
                         <div class="actions">
                             <?php if ($_SESSION['Rol'] == 1): ?>
                                 <a href="modificaconcierto.php?idConcierto=<?php echo $concierto['idConcierto']; ?>" class="edit-button">Modificar</a>
-                                <a href="conciertos.php?idConcierto=<?php echo $concierto['idConcierto']; ?>" class="delete-button" onclick="return confirm('¿Estás seguro de que deseas eliminar este concierto?');">Eliminar</a>
-                            <?php else: ?>
-                                <!-- <p style="color: gray;">Se necesita ser administrador.</p> -->
+                                <a href="eliminaconcierto.php?idConcierto=<?php echo $concierto['idConcierto']; ?>" class="delete-button" onclick="return confirm('¿Estás seguro de que deseas eliminar este concierto?');">Eliminar</a>
                             <?php endif; ?>
                             <a href="compras.php?idConcierto=<?php echo $concierto['idConcierto']; ?>" class="buy-button">Comprar Entradas</a>
                         </div>
@@ -127,21 +128,24 @@ if (!empty($filtros)) {
             <?php else: ?>
                 <p>No hay conciertos disponibles.</p>
             <?php endif; ?>
-        </div>   
+        </div>
 
         <!-- Pie -->
         <div class="pie">
             <video autoplay muted loop id="pie-video">
                 <source src="../vid/fondo.mp4" type="video/mp4">
             </video>
-            <a href="#"><img src="https://img.icons8.com/?size=100&id=32292&format=png&color=FFFFFF"></a>
-            <a href="#"><p>ConcertHub</p></a>
-            <a href="#"><img src="https://img.icons8.com/?size=100&id=435&format=png&color=FFFFFF"></a>
-            <a href="#"><p>ConcertHub</p></a>
-            <a href="#"><img src="https://img.icons8.com/?size=100&id=111056&format=png&color=FFFFFF"></a>
-            <a href="#"><p>ConcertHub</p></a>
-            <h2>ConcertHub &copy; 2022 Todos los derechos reservados.</h2>
+            <div class="pie-content">
+                <div class="pie-brand">ConcertHub</div>
+                <div class="pie-socials">
+                    <a href="#" target="_blank"><img src="https://img.icons8.com/?size=100&id=32292&format=png&color=FFFFFF" alt="Facebook"></a>
+                    <a href="#" target="_blank"><img src="https://img.icons8.com/?size=100&id=435&format=png&color=FFFFFF" alt="Twitter"></a>
+                    <a href="#" target="_blank"><img src="https://img.icons8.com/?size=100&id=111056&format=png&color=FFFFFF" alt="Instagram"></a>
+                </div>
+                <h2>ConcertHub &copy; 2022 Todos los derechos reservados.</h2>
+            </div>
         </div>
     </div>
 </body>
+
 </html>

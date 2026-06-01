@@ -1,17 +1,7 @@
-const clientId = 'CLIENTE_ID'; // Reemplaza con tu Client ID
-const clientSecret = 'CLIENTE_SECRET_ID'; // Reemplaza con tu Client Secret
-
-// Función para obtener el token de acceso
+// Función para obtener el token de acceso de manera segura desde el backend PHP
 async function getAccessToken() {
     try {
-        const response = await fetch('https://accounts.spotify.com/api/token', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                Authorization: 'Basic ' + btoa(clientId + ':' + clientSecret),
-            },
-            body: 'grant_type=client_credentials',
-        });
+        const response = await fetch('../php/get_spotify_token.php');
 
         if (!response.ok) {
             throw new Error(`Error al obtener el token: ${response.statusText}`);

@@ -1,5 +1,12 @@
 <?php
 require_once "cad.php";
+session_start();
+
+// Verificar si el usuario ha iniciado sesión y si tiene permisos de administrador
+if (!isset($_SESSION['idUsuario']) || $_SESSION['Rol'] != 1) {
+    header("Location: logreg.php");
+    exit();
+}
 
 $cad = new CAD();
 $datos = $cad->traeUsuarios();
@@ -22,6 +29,9 @@ $datos = $cad->traeUsuarios();
     <div class="login-register-container">
         <div class="form-wrapper">
             <h2>Eliminar Usuarios</h2>
+            <?php if (!empty($_GET['mensaje'])): ?>
+                <p style="color: green; text-align: center; font-weight: bold; margin-bottom: 15px;"><?php echo htmlspecialchars($_GET['mensaje']); ?></p>
+            <?php endif; ?>
             <?php if ($datos): ?>
                 <table>
                     <thead>
