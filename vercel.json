@@ -1,0 +1,21 @@
+{
+  "functions": {
+    "php/**/*.php": {
+      "runtime": "vercel-php@0.7.1"
+    }
+  },
+  "routes": [
+    {
+      "src": "/(css|js|img|imgart|songsart|vid)/(.*)",
+      "dest": "/$1/$2"
+    },
+    {
+      "src": "/php/(.*)\\.php",
+      "dest": "/php/$1.php"
+    },
+    {
+      "src": "/",
+      "dest": "/php/logreg.php"
+    }
+  ]
+}
