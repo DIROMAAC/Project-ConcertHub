@@ -60,12 +60,65 @@ class Conexion
             $enlace->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $enlace->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
+            # Forzar compatibilidad de nombres de columnas camelCase en PostgreSQL
+            $enlace->setAttribute(PDO::ATTR_STATEMENT_CLASS, ['SafePDOStatement', []]);
+
             # Retornar la conexión
             return $enlace;
         } catch (PDOException $e) {
             # Mostrar un error claro si no se puede conectar
             die("Error al conectar a la base de datos de Supabase: " . $e->getMessage());
         }
+    }
+}
+
+class SafePDOStatement extends PDOStatement
+{
+    protected function __construct() {}
+
+    private function mapKeys(&$row)
+    {
+        if (!is_array($row)) {
+            return;
+        }
+        $mapping = [
+            'idusuario' => 'idUsuario',
+            'idconcierto' => 'idConcierto',
+            'idcodigo' => 'idCodigo',
+            'idartista' => 'idArtista',
+            'idcancion' => 'idCancion',
+            'idcompra' => 'idCompra',
+            'rol' => 'Rol'
+        ];
+        foreach ($mapping as $lower => $camel) {
+            if (array_key_exists($lower, $row) && !array_key_exists($camel, $row)) {
+                $row[$camel] = $row[$lower];
+            }
+        }
+    }
+
+    #[\ReturnTypeWillChange]
+    public function fetch($mode = PDO::FETCH_DEFAULT, $cursorOrientation = PDO::FETCH_ORI_NEXT, $cursorOffset = 0)
+    {
+        $row = parent::fetch($mode, $cursorOrientation, $cursorOffset);
+        if (is_array($row)) {
+            $this->mapKeys($row);
+        }
+        return $row;
+    }
+
+    #[\ReturnTypeWillChange]
+    public function fetchAll($mode = PDO::FETCH_DEFAULT, ...$args)
+    {
+        $rows = parent::fetchAll($mode, ...$args);
+        if (is_array($rows)) {
+            foreach ($rows as &$row) {
+                if (is_array($row)) {
+                    $this->mapKeys($row);
+                }
+            }
+        }
+        return $rows;
     }
 }
 
