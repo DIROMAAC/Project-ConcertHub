@@ -1,5 +1,13 @@
 <?php
 
+# Manejador de errores para ignorar silenciosamente avisos redundantes de session_start() en las vistas
+set_error_handler(function ($errno, $errstr) {
+    if (strpos($errstr, 'session_start()') !== false || strpos($errstr, 'session already active') !== false) {
+        return true;
+    }
+    return false;
+});
+
 # Restaurar sesión desde la cookie segura en Vercel antes de que cualquier vista verifique $_SESSION
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
