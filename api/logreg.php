@@ -137,7 +137,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $iv = openssl_random_pseudo_bytes($ivlen);
                     $ciphertext = openssl_encrypt($sessionData, $cipher, $key, 0, $iv);
                     $cookieValue = base64_encode($iv . $ciphertext);
-                    setcookie('ch_user_session', $cookieValue, time() + 86400 * 30, '/', '', true, true);
+                    $isSecure = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on';
+                    setcookie('ch_user_session', $cookieValue, time() + 86400 * 30, '/', '', $isSecure, true);
 
                     header("Location: prin.php");
                     exit();

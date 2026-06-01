@@ -53,15 +53,15 @@ if (isset($_GET['idArtista'])) {
                 <p>ConcertHub</p>
             </div>
             <div class="sections">
-                <a href="../php/prin.php">HOME</a>
-                <a href="../php/artistas.php">ARTISTAS</a>
-                <a href="../php/conciertos.php">CONCIERTOS</a>
-                <a href="../php/actualiza.php">PERFIL</a>
+                <a href="prin.php">HOME</a>
+                <a href="artistas.php">ARTISTAS</a>
+                <a href="conciertos.php">CONCIERTOS</a>
+                <a href="actualiza.php">PERFIL</a>
             </div>
             <div class="icons">
-                <a href="../php/search.php"><img src="https://img.icons8.com/?size=100&id=7695&format=png&color=FFFFFF"></a>
-                <a href="../php/compras.php"><img src="https://img.icons8.com/?size=100&id=59997&format=png&color=FFFFFF"></a>
-                <a href="../php/logout.php"><img src="https://img.icons8.com/?size=100&id=98957&format=png&color=FFFFFF"></a>
+                <a href="search.php"><img src="https://img.icons8.com/?size=100&id=7695&format=png&color=FFFFFF"></a>
+                <a href="compras.php"><img src="https://img.icons8.com/?size=100&id=59997&format=png&color=FFFFFF"></a>
+                <a href="logout.php"><img src="https://img.icons8.com/?size=100&id=98957&format=png&color=FFFFFF"></a>
             </div>
         </div>
 
