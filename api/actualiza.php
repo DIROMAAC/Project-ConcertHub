@@ -1,5 +1,5 @@
 <?php
-require_once "cad.php";
+require_once __DIR__ . "/CAD.php";
 session_start();
 
 // Verificar si el usuario ha iniciado sesión

@@ -8,7 +8,7 @@ if (!isset($_SESSION['idUsuario']) || $_SESSION['Rol'] != 1) {
 }
 
 // Incluir el archivo CAD para usar la clase
-require_once 'cad.php';
+require_once __DIR__ . "/CAD.php";
 
 if (isset($_GET['idArtista'])) {
     $idArtista = $_GET['idArtista'];

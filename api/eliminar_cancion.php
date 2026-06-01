@@ -1,5 +1,5 @@
 <?php
-require_once "cad.php";  // Incluir la clase CAD
+require_once __DIR__ . "/CAD.php";  // Incluir la clase CAD
 session_start();
 
 // Verificar si el usuario ha iniciado sesión y si tiene permisos de administrador

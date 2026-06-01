@@ -8,7 +8,7 @@ if (!isset($_SESSION['idUsuario'])) {
 }
 
 // Conexión a la base de datos
-require_once 'conexion.php';
+require_once __DIR__ . "/conexion.php";
 $con = new Conexion();
 $pdo = $con->conectar();
 

@@ -1,5 +1,5 @@
 <?php
-require_once "cad.php";
+require_once __DIR__ . "/CAD.php";
 session_start();
 
 // Verifica si el usuario está logueado y tiene el rol adecuado
